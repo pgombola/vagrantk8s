@@ -8,6 +8,6 @@ kubectl create -f /vagrant/manifests/rook/rook-cluster.yaml
 ```console
 kubectl create -f /vagrant/manifests/rook/rook-tools.yaml
 ```
-https://rook.io/docs/rook/master/toolbox.html
+[Toolbox Docs](https://rook.io/docs/rook/master/toolbox.html)
 ### TODO
 - seeing some clock skew from `ceph -s`, need to look at how to deal with that
