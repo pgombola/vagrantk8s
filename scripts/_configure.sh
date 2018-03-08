@@ -38,8 +38,8 @@ EOF
   sysctl -p
 fi
 
-#echo "$baseip.100 control" > /etc/hosts
-#for i in $(seq -f "%02g" 1 $hosts); do
-#  suffix="$((100 + $i))"
-#  echo "$baseip.$suffix"  node-$i >> /etc/hosts
-#done
+echo "$baseip.100 control" > /etc/hosts
+for i in $(seq -f "%02g" 1 $hosts); do
+  suffix="$((100 + $i))"
+  echo "$baseip.$suffix"  node$i >> /etc/hosts
+done
