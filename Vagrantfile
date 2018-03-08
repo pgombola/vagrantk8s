@@ -5,7 +5,7 @@ require 'rbconfig'
 Vagrant.require_version ">= 1.9.0"
 
 $num_controllers = 1
-$num_workers = (ENV['WORKERS'] || 0).to_i
+$num_nodes = (ENV['NODES'] || 0).to_i
 $vm_gui = false
 $vm_memory = 1024
 $vm_cpus = 1
@@ -48,7 +48,7 @@ Vagrant.configure("2") do |config|
     controller.vm.provision "shell", privileged: false, path: "scripts/_kube-init.sh", args:[$temp]
   end
 
-  (1..$num_workers).each do |n|
+  (1..$num_nodes).each do |n|
     name = "node#{'%02d' % n}"
     config.vm.define name do |node|
       node.vm.hostname = name
