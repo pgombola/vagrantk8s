@@ -1,0 +1,7 @@
+apiVersion: rook.io/v1alpha1
+kind: Pool
+metadata:
+  name: replicapool
+spec:
+  replicated:
+    size: 3
