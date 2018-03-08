@@ -1,6 +1,6 @@
 # About
 
-Contains a vagrant environtment that will start a Kubernetes cluster and manifests to deploy  Rook that is use for storage of CockroachDB data.
+Contains a vagrant environment that will start a Kubernetes cluster and manifests to deploy  Rook that is use for storage of CockroachDB data.
 
 ## Prerequisites
 - VirtualBox
