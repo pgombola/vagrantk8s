@@ -25,6 +25,7 @@ Vagrant.configure("2") do |config|
     vb.memory = $vm_memory
     vb.cpus = $vm_cpus
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    vb.customize ["guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/ — timesync-set-threshold", 10000]
   end
 
   config.vm.define "control" do |controller|
@@ -45,6 +46,7 @@ Vagrant.configure("2") do |config|
       node.vm.provision "shell", path: "scripts/_configure.sh", args:[$num_workers, $subnet]
       node.vm.provision "shell", path: "scripts/_kube_install.sh"
       node.vm.provision "shell", path: "#{$temp}/join.sh"
+      node.vm.provision "shell", inline: "sysctl net.bridge.bridge-nf-call-iptables=1"
     end
   end
 
