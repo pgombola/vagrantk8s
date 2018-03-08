@@ -14,7 +14,7 @@ kubectl -n rook exec -it rook-tools bash
 ## Creating some storage
 To create block storage we need a pool and a storage class
 ```
-kubectl create -f /vagrant/manifests/rook/rook-pool.yaml
+kubectl -n rook create -f /vagrant/manifests/rook/rook-pool.yaml
 kubectl create -f /vagrant/manifests/rook/rook-storage.yaml
 ```
 
