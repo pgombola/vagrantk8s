@@ -25,7 +25,18 @@ Vagrant.configure("2") do |config|
     vb.memory = $vm_memory
     vb.cpus = $vm_cpus
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-    vb.customize ["guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/ — timesync-set-threshold", 10000]
+    vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+    # Compare the time every 1 seconds.
+    vb.customize ["guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-interval", "1000"]
+    # Only change by 1 second at a time.
+    # Changing the time a lot can confuse processes that interrogate the time to do their work.
+    vb.customize ["guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 1000]
+    # Only change when it is ±0.1s out.
+    vb.customize ["guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-min-adjust", "50"]
+    # Resync time when we restart.
+    vb.customize ["guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-on-restore", "1"]
+    # Set the time when starting the service.
+    vb.customize ["guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-start"]
   end
 
   config.vm.define "control" do |controller|
