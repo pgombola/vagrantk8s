@@ -20,3 +20,4 @@ kubectl create -f /vagrant/manifests/rook/rook-storage.yaml
 
 ## TODO
 - seeing some clock skew from `ceph -s`, need to look at how to deal with that
+  - Added timesync threshold on vbox manage
