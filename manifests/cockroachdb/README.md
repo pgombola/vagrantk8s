@@ -6,6 +6,6 @@ Each cockroachdb pod will request a certificate from kubernetes as part of an in
 
 ```kubectl get csr```
 
-Approve the certificates for each pod (replacing `<index>` using:
+Approve the certificates for each pod (replacing `<index>`) using:
 
 ```kubectl approve certificate default.node.cockroachdb-<index>```
