@@ -9,6 +9,7 @@ kubectl create -f /vagrant/manifests/rook/rook-cluster.yaml
 kubectl create -f /vagrant/manifests/rook/rook-tools.yaml
 kubectl -n rook exec -it rook-tools bash
 ```
+
 [Toolbox Docs](https://rook.io/docs/rook/master/toolbox.html)
 
 ## Creating some storage
