@@ -2,8 +2,9 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
+	"os"
+	"os/signal"
 	"time"
 
 	// Import postgres driver.
@@ -13,8 +14,14 @@ import (
 func main() {
 	log.Println("starting app")
 
-	url := fmt.Sprintf("postgresql://root@cockroachdb-public:26257")
-	db, err := sql.Open("postgres", url)
+	conn := `user=root
+		host=cockroachdb-public
+		port=26257
+		sslcert=/cockroach-certs/client.root.crt
+		sslkey=/cockroach-certs/client.root.key`
+
+	// url := fmt.Sprintf("postgresql://root@cockroachdb-public:26257?sslcert=/cockroach-certs/client.root.crt")
+	db, err := sql.Open("postgres", conn)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -33,5 +40,11 @@ func main() {
 		log.Fatal(dbErr)
 	}
 
+	doneCh := make(chan os.Signal, 1)
+	signal.Notify(doneCh, os.Interrupt, os.Kill)
 	log.Println("app started")
+	select {
+	case sig := <-doneCh:
+		log.Printf("exiting app with %v\n", sig)
+	}
 }
