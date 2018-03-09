@@ -43,7 +43,7 @@ Vagrant.configure("2") do |config|
     controller.vm.hostname = "control"
     ip = "#{$subnet}.100"
     controller.vm.network "private_network", ip: ip
-    controller.vm.provision "shell", path: "scripts/_configure.sh", args:[$num_workers, $subnet]
+    controller.vm.provision "shell", path: "scripts/_configure.sh", args:[$num_nodes, $subnet]
     controller.vm.provision "shell", path: "scripts/_kube_install.sh"
     controller.vm.provision "shell", privileged: false, path: "scripts/_kube-init.sh", args:[$temp]
   end
@@ -54,7 +54,7 @@ Vagrant.configure("2") do |config|
       node.vm.hostname = name
       ip = "#{$subnet}.#{n+100}"
       node.vm.network "private_network", ip: ip
-      node.vm.provision "shell", path: "scripts/_configure.sh", args:[$num_workers, $subnet]
+      node.vm.provision "shell", path: "scripts/_configure.sh", args:[$num_nodes, $subnet]
       node.vm.provision "shell", path: "scripts/_kube_install.sh"
       node.vm.provision "shell", path: "#{$temp}/join.sh"
       node.vm.provision "shell", inline: "sysctl net.bridge.bridge-nf-call-iptables=1"
