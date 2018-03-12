@@ -14,4 +14,4 @@ The environment only runs a single control plane. The number of nodes in the clu
 NODES=3 vagrant up
 ```
 
-From here you can deploy [rook](manifests/rook/README.md), [cockroachdb](manifests/cockroachdb/README.md) and the [sample app](manifests/app/README.md).
+From here you can deploy [rook](manifests/rook), [cockroachdb](manifests/cockroachdb) and the [sample app](manifests/app).
