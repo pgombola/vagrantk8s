@@ -1,0 +1,1 @@
+```kubectl apply -f /vagrant/manifests/app/secure-app.yaml```
